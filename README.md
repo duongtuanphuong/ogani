@@ -2,7 +2,7 @@
 Simple e-commerce website
 
 ## Systems analysis and design
-[Document here](https://docs.google.com/document/d/1-6Ru2IOioTl3lg0s0TrXmLUL3CNCRertbH4wIG_1z78/edit?usp=sharing)
+[Document here](https://docs.google.com/document/d/15LlPJ1ml2mhi5k_id07NnRnk0Hnt7AReZGlLLF4fsJo/edit?usp=sharing)
 
 ## Running the application locally
 
@@ -22,15 +22,12 @@ Alternatively you can use the [Spring Boot Maven plugin](https://docs.spring.io/
 mvn spring-boot:run
 ```
 
-Import database from ```obo.sql```. Using two default account:
+
+Import database from ```oganisql.sql```. Using default account:
 
 - Admin account:
     - Username: admin@gmail.com
-    - Password: 123456
-
-
-To access url ```/admin``` to get admin pages.  
-   
+    - Password: 123456   
 
 
 ## Built with
