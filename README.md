@@ -4,6 +4,7 @@ Simple e-commerce website
 ## Systems analysis and design
 [Document here](https://docs.google.com/document/d/15LlPJ1ml2mhi5k_id07NnRnk0Hnt7AReZGlLLF4fsJo/edit?usp=sharing)
 
+
 ## Running the application locally
 
 Config ```application.properties``` file:
@@ -28,7 +29,8 @@ Import database from ```oganisql.sql```. Using default account:
 - Admin account:
     - Username: admin@gmail.com
     - Password: 123456   
-
+## Rest Api Document
+[Document Here](http://localhost:8080/swagger-ui/index.html#)
 
 ## Built with
 - [Java Spring](https://spring.io/)
