@@ -1,0 +1,58 @@
+<p-toast></p-toast>
+
+<p-card>
+    <p-toolbar styleClass="mb-4 gap-2">
+        <ng-template pTemplate="left">
+            <button pButton pRipple label="Thêm Tag" icon="pi pi-plus" class="p-button-success mr-2" (click)="showForm()" ></button>
+        </ng-template>
+    </p-toolbar>
+
+    <p-dialog header="Tag" [(visible)]="displayForm" [style]="{width: '30vw'}" [modal]="true" [transitionOptions]="'.2s'">
+        <form action="">
+            <div class="p-field">
+                <label for="username">Tên Tag: </label>
+                <input type="text" pInputText class="w-full mt-2" [(ngModel)]="tagForm.name" name="name">
+            </div>
+            <div class="p-field mt-3">
+                <button type="submit" pButton (click)="createTag()" *ngIf="!onUpdate" >Tạo mới</button>
+                <button type="submit" pButton *ngIf="onUpdate" >Cập nhật</button>
+                <button pButton type="button" class="p-button-danger ml-3" (click)="displayForm=false">Hủy</button>
+            </div>
+        </form>
+    </p-dialog>
+
+    <p-table [value]="listTag" [rows]="5" [paginator]="true">
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Name</th>
+                <th>Enable</th>
+                <th>Action</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-tag>
+            <tr> 
+                <td>{{tag.name}}</td>
+                <td>
+                    <button pButton type="button" class="p-button-info" (click)="enableTag(tag.id)" *ngIf="tag.enable">Enabled</button>
+                    <button pButton type="button" class="p-button-warning" (click)="enableTag(tag.id)" *ngIf="!tag.enable">Disabled</button>
+                </td>
+                <td>
+                    <button pButton type="button" icon="pi pi-pencil" class="p-button-rounded p-button-primary"></button>
+                    <button pButton type="button" icon="pi pi-trash" (click)="onDelete(tag.id,tag.name)" class="p-button-rounded p-button-danger ml-2"></button>
+                    <p-dialog header="Xác nhận" [(visible)]="deleteForm" [style]="{width :'30vw'}" [modal]="true" [transitionOptions]="'.3s'">
+                        <div>
+                            <i class="pi pi pi-exclamation-triangle"></i>
+                            <span class="ml-2">Bạn có chắc xóa <span></span> ?</span>
+                        </div>
+                        <div class="flex justify-content-end mt-3">
+                            <p-button label="Yes" icon="pi pi-check" (click)="deleteTag()" class="mr-2" ></p-button>
+                            <p-button label="No" icon="pi pi-times" (click)="deleteForm=false"></p-button>
+                        </div>
+                    </p-dialog>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+
+</p-card>
+

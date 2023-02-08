@@ -1,0 +1,75 @@
+<section class="breadcrumb-section set-bg" [ngStyle]="{backgroundImage:'url(assets/image/breadcrumb.jpg'}">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="breadcrumb__text">
+                    <h2>Blog</h2>
+                    <div class="breadcrumb__option">
+                        <a routerLink="/" >Blog</a>
+                        <span>Blog</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="blog spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-md-5">
+                <div class="blog__sidebar">
+                    <div class="blog__sidebar__search">
+                        <form action="#">
+                            <input type="text" placeholder="Search...">
+                            <button type="submit"><span class="icon_search"></span></button>
+                        </form>
+                    </div>
+                    <div class="blog__sidebar__item">
+                        <h4>Tags</h4>
+                        <ul>
+                            <li *ngFor="let tag of listTag"><a href="javascript:void(0)">{{tag.name}}</a></li>
+                        </ul>
+                    </div>
+                    <div class="blog__sidebar__item">
+                        <h4>Recent News</h4>
+                        <div class="blog__sidebar__recent">
+                            <a href="javascript:void(0)" routerLink="/blog/{{blog.id}}" class="blog__sidebar__recent__item" *ngFor="let blog of listBlogNewest">
+                                <div class="blog__sidebar__recent__item__pic">
+                                    <img src="{{'data:image/jpg;base64,' + blog.image.data}}" alt="" width="75px">
+                                </div>
+                                <div class="blog__sidebar__recent__item__text">
+                                    <h6>{{blog.title}}</h6>
+                                    <span>{{blog.createAt}}</span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-lg-8 col-md-7">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-6" *ngFor="let blog of listBlog">
+                        <div class="blog__item">
+                            <div class="blog__item__pic">
+                                <img src="{{'data:image/jpg;base64,' + blog.image.data}}" alt="">
+                            </div>
+                            <div class="blog__item__text">
+                                <ul>
+                                    <li><i class="fa fa-calendar-o"></i> {{blog.createAt}}</li>
+                                    <li><i class="fa fa-comment-o"></i> 5</li>
+                                </ul>
+                                <h5><a href="javascript:void(0)" routerLink="/blog/{{blog.id}}">{{blog.description}}</a></h5>
+                                <p>Sed quia non numquam modi tempora indunt ut labore et dolore magnam aliquam
+                                    quaerat </p>
+                                <a href="javascript:void(0)" routerLink="/blog/{{blog.id}}" class="blog__btn">READ MORE <span class="arrow_right"></span></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

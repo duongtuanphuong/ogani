@@ -1,0 +1,132 @@
+<p-card class="card">
+    <p-toolbar styleClass="mb-4 gap-2">
+        <ng-template pTemplate="left">
+            <button pButton pRipple label="Thêm Blog" icon="pi pi-plus" class="p-button-success mr-2" (click)="showNew()" ></button>
+        </ng-template>
+    </p-toolbar>
+
+    <p-table #dt [value]="listBlog" [rows]="10" [paginator]="true" [globalFilterFields]="['title','name']" [tableStyle]="{'min-width': '75rem'}"
+        [rowHover]="true" dataKey="id"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true">
+        <ng-template pTemplate="caption">
+            <div class="flex align-items-center justify-content-between">
+                <h5 class="m-0">Manage Blog</h5>
+                <span class="p-input-icon-left">
+                    <i class="pi pi-search"></i>
+                    <input pInputText type="text" (input)="dt.filterGlobal($any($event.target).value, 'contains')" placeholder="Tìm kiếm" />`
+                </span>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th>
+                    <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                </th>
+                <th>Image</th>
+                <th pSortableColumn="name"  style="min-width:10rem">Title <p-sortIcon field="name"></p-sortIcon></th>
+                <th pSortableColumn="price"  style="min-width:15rem">Description <p-sortIcon field="price"></p-sortIcon></th>
+                <th pSortableColumn="category" style="min-width:15rem">Content <p-sortIcon field="category"></p-sortIcon></th>
+                <th style="min-width:10rem">Action</th>
+                <th></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-blog>
+            <tr>
+                <td>
+                    <p-tableCheckbox [value]="blog"></p-tableCheckbox>
+                </td>
+                <td><img src="{{'data:image/jpg;base64,' +blog.image.data}}" [alt]="blog.title" width="100" class="shadow-4" /></td>
+                <td>{{blog.title}}</td>
+                <td>{{blog.description}}</td>
+                <td>{{blog.content}}</td>
+                <td>
+                    <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" (click)="showUpdate(blog)" ></button>
+                    <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning"  (click)="showDelete(blog.id,blog.title)"></button>
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="summary">
+            <div class="flex align-items-center justify-content-between">
+                <!-- In total there are {{products ? products.length : 0 }} products. -->
+            </div>
+        </ng-template>
+    </p-table>
+
+</p-card>
+
+
+
+<p-dialog [(visible)]="showForm" [style]="{width: '30vw'}" header="Product Details" [modal]="true" styleClass="p-fluid">
+    <ng-template pTemplate="content">
+        <!-- <img [src]="'assets/showcase/images/demo/product/' + product.image" [alt]="product.image" class="product-image" *ngIf="product.image"> -->
+        <div class="field">
+            <label for="name">Title</label>
+            <input type="text" pInputText id="title" [(ngModel)]="blogForm.title" required autofocus />
+            <!-- <small class="p-error" *ngIf="submitted && !product.name">Name is required.</small> -->
+        </div>
+
+        <div class="field">
+            <label for="name">Tag</label>
+            <p-multiSelect [options]="listTag" [(ngModel)]="selectedTags" optionLabel="name" optionValue="id"></p-multiSelect>
+            <!-- <small class="p-error" *ngIf="submitted && !product.name">Name is required.</small> -->
+        </div>
+
+        <div class="field">
+            <label for="description">Description</label>
+            <textarea id="description" pInputTextarea [(ngModel)]="blogForm.description" required rows="2" cols="20"></textarea>
+        </div>
+        <div class="field">
+            <label for="content">Content</label>
+            <textarea id="content" pInputTextarea [(ngModel)]="blogForm.content" required rows="4" cols="20"></textarea>
+        </div>
+
+        <div class="field">
+            <button pButton type="button" class="p-button-success w-auto" (click)="onChooseImage()" > Chọn ảnh</button>
+            <p-dialog header="Chọn ảnh" [(visible)]="showImage" position="top" [modal]="true" [style]="{width: '40vw'}" [transitionOptions]="'.3s'">
+                <div class="flex justify-content-between">
+                    <div>
+                        <input type="file" #file (change)="uploadFile($event)" hidden>
+                        <button pButton (click)="file.click()" label="Tải ảnh lên" icon="pi pi-plus" class="p-button-warning w-auto"></button>
+                    </div>
+                    <div>
+                        <button pButton class="p-button-primary w-auto" label="Chọn ảnh" [disabled]="disabled" (click)="chooseImage()"></button>
+                        <button pButton class="p-button-danger ml-2 w-auto" icon="pi pi-trash " label="Xóa ảnh" [disabled]="disabled"></button>
+                    </div>
+                </div>
+                <p-divider align="left" >
+                    Ảnh đã tải lên
+                </p-divider>
+                <div class="grid">
+                    <div class="col-4 list-image flex align-items-center" *ngFor="let image of listImage" >
+                        <img src="{{'data:image/jpg;base64,' + image.data}}" alt="" class="w-full h-full p-2 border-1 " (click)="selectImage($event,image)" >
+                    </div>
+                </div>
+            </p-dialog>
+            <div class="grid mt-1" *ngIf="image != null">
+                <div class="product-image col-2 flex align-items-center">
+                    <img src="{{'data:image/jpg;base64,' + image.data}}" alt="" class="w-full h-full">
+                    <button pButton pRipple type="button" icon="pi pi-times" class="p-button-rounded p-button-danger p-button-text delete-image"></button>
+                </div>
+            </div>
+        </div>
+
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+        <button type="submit" pButton *ngIf="!onUpdate" (click)="createBlog()">Tạo mới</button>
+        <button type="submit" pButton *ngIf="onUpdate" (click)="updateBlog()" >Cập nhật</button>
+        <button pButton type="button" class="p-button-danger ml-3" (click)="showForm=false">Hủy</button>
+    </ng-template>
+</p-dialog>
+
+
+<p-dialog header="Xác nhận" [(visible)]="onDelete" [style]="{width :'30vw'}" [modal]="true" [transitionOptions]="'.3s'">
+    <div>
+        <i class="pi pi pi-exclamation-triangle"></i>
+        <span class="ml-2">Bạn có chắc xóa <span>{{blogForm.title}}</span> ?</span>
+    </div>
+    <div class="flex justify-content-end mt-3">
+        <p-button label="Yes" icon="pi pi-check" class="mr-2" (click)="deleteBlog()"></p-button>
+        <p-button label="No" icon="pi pi-times" (click)="onDelete=false"></p-button>
+    </div>
+</p-dialog>

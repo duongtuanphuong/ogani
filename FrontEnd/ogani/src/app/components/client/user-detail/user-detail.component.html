@@ -1,0 +1,97 @@
+<section class="breadcrumb-section set-bg" [ngStyle]="{backgroundImage:'url(assets/image/breadcrumb.jpg'}">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="breadcrumb__text">
+                    <h2>UserDetail</h2>
+                    <div class="breadcrumb__option">
+                        <a routerLink="/" >Home</a>
+                        <span>User</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="user mt-5 mb-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 border-right" *ngIf="user != null">
+                <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" 
+                        src="assets/image/author.jpg"><span
+                        class="font-weight-bold">{{user.username}}</span><span class="text-black-50">{{user.email}}</span><span>
+                </span></div>
+            </div>
+            <div class="col-md-5 border-right">
+                <div class="p-3 py-5">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h4 class="text-right">Profile Settings</h4>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-md-6"><label class="labels">First Name</label>
+                            <input type="text" class="form-control" placeholder="First Name" [(ngModel)]="updateForm.firstname" name="firstname">
+                        </div>
+                        <div class="col-md-6"><label class="labels">Last Name</label>
+                            <input type="text" class="form-control" placeholder="Last Name" [(ngModel)]="updateForm.lastname" name="lastname">
+                            </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-12"><label class="labels">PhoneNumber</label>
+                            <input type="text"  class="form-control" placeholder="Phone Number" [(ngModel)]="updateForm.phone" name="phone">
+                        </div>
+                        <div class="col-md-12"><label class="labels">Address</label>
+                            <input type="text" class="form-control" placeholder="Address" [(ngModel)]="updateForm.address" name="address">
+                        </div>
+                        <div class="col-md-12"><label class="labels">Email</label>
+                            <input type="text" class="form-control" placeholder="Email" [(ngModel)]="updateForm.email" name="email">
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-6"><label class="labels">Country</label>
+                            <input type="text" class="form-control" placeholder="country" [(ngModel)]="updateForm.country" name="country">
+                        </div>
+                        <div class="col-md-6"><label class="labels">State/Region</label>
+                            <input type="text" class="form-control" placeholder="state" [(ngModel)]="updateForm.state" name="state">
+                        </div>
+                    </div>
+                    <div class="mt-5 text-center">
+                        <button class="btn btn-primary profile-button" type="button" (click)="updateProfile()">Save Profile</button>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="col-md-4">
+                <div class="p-3 py-5">
+                    <div class="col-md-12">
+                        <button pButton pRipple type="button" label="Change Password" class="p-button-primary" (click)="showChangePassword()"></button>
+                        <p-dialog header="Danh mục" [(visible)]="changePassword" [style]="{width: '30vw'}" [modal]="true" [transitionOptions]="'.3s'">
+                            <form action="">
+                                <div class="p-field">
+                                    <label for="username">Old Password: </label>
+                                    <input type="text" pInputText class="w-full mt-2" [(ngModel)]="changePasswordForm.oldPassword" name="oldPassword">
+                                </div>
+                                <div class="p-field">
+                                    <label for="username">New Password: </label>
+                                    <input type="text" pInputText class="w-full mt-2" name="name"[(ngModel)]="changePasswordForm.newPassword">
+                                </div>
+                                <div class="p-field">
+                                    <label for="username">Repeat Password: </label>
+                                    <input type="text" pInputText class="w-full mt-2" name="name">
+                                </div>
+                                <div class="p-field mt-3">
+                                    <button type="submit" pButton (click)="changePasswordFunc()" >Save</button>
+                                    <button pButton type="button" class="p-button-danger ml-3" (click)="changePassword=false">Hủy</button>
+                                </div>
+                            </form>
+                        </p-dialog>
+                    </div>
+                </div>
+            </div> -->
+        </div>
+    </div>
+</section>
+<!-- <div class="container rounded bg-white mt-5 mb-5">
+    <div class="row">
+
+    </div>
+</div> -->

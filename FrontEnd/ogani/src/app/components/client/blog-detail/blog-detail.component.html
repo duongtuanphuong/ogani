@@ -1,0 +1,123 @@
+<section class="breadcrumb-section set-bg" [ngStyle]="{backgroundImage:'url(assets/image/breadcrumb.jpg'}">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="breadcrumb__text">
+                    <h2>Blog</h2>
+                    <div class="breadcrumb__option">
+                        <a routerLink="/" >Home</a>
+                        <a routerLink="/blog">Blog</a>
+                        <span *ngIf="blog != null">{{blog.title}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="blog-details spad">
+    <div class="container">
+        <div class="row"  *ngIf="blog != null">
+            <div class="col-lg-4 col-md-5 order-md-1 order-2">
+                <div class="blog__sidebar">
+                    <div class="blog__sidebar__search">
+                        <form action="#">
+                            <input type="text" placeholder="Search...">
+                            <button type="submit"><span class="icon_search"></span></button>
+                        </form>
+                    </div>
+                    <div class="blog__sidebar__item">
+                        <h4>Tags</h4>
+                        <ul>    
+                            <li *ngFor="let tag of listTag"><a href="javascript:void(0)">{{tag.name}}</a></li>
+                        </ul>
+                    </div>
+                    <div class="blog__sidebar__item" >
+                        <h4>Recent News</h4>
+                        <div class="blog__sidebar__recent">
+                            <a href="javascript:void(0)" class="blog__sidebar__recent__item" *ngFor="let blog of listBlogNewest">
+                                <div class="blog__sidebar__recent__item__pic">
+                                    <img src="{{'data:image/jpg;base64,' + blog.image.data}}" alt="" width="75px">
+                                </div>
+                                <div class="blog__sidebar__recent__item__text">
+                                    <h6>{{blog.title}}</h6>
+                                    <span>{{blog.createAt}}</span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-8 col-md-7 order-md-1 order-1">
+                <div class="blog__details__text">
+                    <img src="{{'data:image/jpg;base64,' + blog.image.data}}" alt="" width="100%">
+                    <h3>{{blog.title}}</h3>
+                    <p>{{blog.description}}</p>
+                    
+                    <p>{{blog.content}}</p>
+                </div>
+                <div class="blog__details__content">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="blog__details__author">
+                                <div class="blog__details__author__pic">
+                                    <img src="assets/image/author.jpg" alt="">
+                                </div>
+                                <div class="blog__details__author__text">
+                                    <h6>{{blog.user.username}}</h6>
+                                    <span>Admin</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="blog__details__widget">
+                                <ul>
+                                    <li><span>Tags:</span> <i *ngFor="let tag of blog.tags" class="mr-1">{{tag.name}}</i></li>
+                                </ul>
+                                <div class="blog__details__social">
+                                    <a href="#"><i class="fa fa-facebook"></i></a>
+                                    <a href="#"><i class="fa fa-twitter"></i></a>
+                                    <a href="#"><i class="fa fa-google-plus"></i></a>
+                                    <a href="#"><i class="fa fa-linkedin"></i></a>
+                                    <a href="#"><i class="fa fa-envelope"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Blog Details Section End -->
+
+<!-- Related Blog Section Begin -->
+<section class="related-blog spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="section-title related-blog-title">
+                    <h2>Post You May Like</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4 col-md-4 col-sm-6" *ngFor="let blog of listBlogNewest">
+                <div class="blog__item">
+                    <div class="blog__item__pic">
+                        <img src="{{'data:image/jpg;base64,' + blog.image.data}}" alt="">
+                    </div>
+                    <div class="blog__item__text">
+                        <ul>
+                            <li><i class="fa fa-calendar-o"></i> May 4,2019</li>
+                            <li><i class="fa fa-comment-o"></i> 5</li>
+                        </ul>
+                        <h5><a href="javascript:void(0)" routerLink="/blog/{{blog.id}}">{{blog.title}}</a></h5>
+                        <p>{{blog.description}} </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

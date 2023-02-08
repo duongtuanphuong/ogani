@@ -1,0 +1,57 @@
+<p-toast></p-toast>
+<p-card>
+    <p-toolbar styleClass="mb-4 gap-2">
+        <ng-template pTemplate="left">
+            <button pButton pRipple label="Thêm danh mục" icon="pi pi-plus" class="p-button-success mr-2" (click)="showForm()"></button>
+        </ng-template>
+    </p-toolbar>
+
+    <p-dialog header="Danh mục" [(visible)]="displayForm" [style]="{width: '30vw'}" [modal]="true" [transitionOptions]="'.3s'">
+        <form action="">
+            <div class="p-field">
+                <label for="username">Tên danh mục: </label>
+                <input type="text" pInputText class="w-full mt-2" [(ngModel)]="categoryForm.name" name="name">
+            </div>
+            <div class="p-field mt-3">
+                <button type="submit" pButton (click)="createCategory()" *ngIf="!onUpdate" >Tạo mới</button>
+                <button type="submit" pButton (click)="updateCategory()" *ngIf="onUpdate" >Cập nhật</button>
+                <button pButton type="button" class="p-button-danger ml-3" (click)="displayForm=false">Hủy</button>
+            </div>
+        </form>
+    </p-dialog>
+
+    <p-table [value]="listCategory" [rows]="5" [paginator]="true">
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Name</th>
+                <th>Enable</th>
+                <th>Action</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-category>
+            <tr> 
+                <td>{{category.name}}</td>
+                <td>
+                    <button pButton type="button" class="p-button-info" (click)="enableCategory(category.id)" *ngIf="category.enable">Enabled</button>
+                    <button pButton type="button" class="p-button-warning" (click)="enableCategory(category.id)" *ngIf="!category.enable">Disabled</button>
+                </td>
+                <td>
+                    <button pButton type="button" icon="pi pi-pencil" class="p-button-rounded p-button-primary" (click)="onUpdateForm(category.id,category.name)"></button>
+                    <button pButton type="button" icon="pi pi-trash" class="p-button-rounded p-button-danger ml-2" (click)="onDelete(category.id,category.name)"></button>
+                    <p-dialog header="Xác nhận" [(visible)]="deleteForm" [style]="{width :'30vw'}" [modal]="true" [transitionOptions]="'.3s'">
+                        <div>
+                            <i class="pi pi pi-exclamation-triangle"></i>
+                            <span class="ml-2">Bạn có chắc xóa <span>{{categoryForm.name}}</span> ?</span>
+                        </div>
+                        <div class="flex justify-content-end mt-3">
+                            <p-button label="Yes" icon="pi pi-check" class="mr-2" (click)="deleteCategory()"></p-button>
+                            <p-button label="No" icon="pi pi-times" (click)="deleteForm=false"></p-button>
+                        </div>
+                    </p-dialog>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+
+
+</p-card>

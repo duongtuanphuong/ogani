@@ -1,0 +1,17 @@
+.price-input{
+    font-size: 16px;
+    color: #dd2222;
+    font-weight: 700;
+    border: none;
+    display: inline-block;
+}
+
+
+:host ::ng-deep .p-slider .p-slider-range, :host ::ng-deep  .p-slider .p-slider-handle {
+    background-color: #dd2222;
+    border-color: #dd2222;
+}
+
+:host ::ng-deep .p-dataview.p-dataview-list .p-dataview-content > .p-grid > div{
+    border: none;
+}
